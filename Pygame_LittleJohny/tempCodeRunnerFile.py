@@ -1,0 +1,1 @@
+left_boxes_button[0].draw(screen)

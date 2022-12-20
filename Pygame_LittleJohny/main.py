@@ -12,7 +12,7 @@ pygame.display.set_caption("Main Menu")
 # game variables
 game_paused = False
 menu_state = "main"
-
+proba = 0
 # define fonts
 font = pygame.font.SysFont("arialblack", 40)
 volume = font.render('volume', False, (255, 255, 255))

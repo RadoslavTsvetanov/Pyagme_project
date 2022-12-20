@@ -12,7 +12,7 @@ pygame.display.set_caption("Main Menu")
 # game variables
 game_paused = False
 menu_state = "main"
-proba = 0
+
 # define fonts
 font = pygame.font.SysFont("arialblack", 40)
 volume = font.render('volume', False, (255, 255, 255))
@@ -29,9 +29,8 @@ keys_img = pygame.image.load('button_keys.png').convert_alpha()
 back_img = pygame.image.load('button_back.png').convert_alpha()
 start_img = pygame.image.load('start_btn.png').convert_alpha()
 # main game img
-size = (160, 160)
-box1 = pygame.transform.scale(
-    pygame.image.load("box1.png").convert_alpha(), size)
+size = (160, 260)
+box1 = pygame.transform.scale(pygame.image.load("box1.png"), size)
 box2 = pygame.transform.scale(
     pygame.image.load("box2.png").convert_alpha(), size)
 box3 = pygame.transform.scale(
@@ -59,8 +58,8 @@ back_button = button.Button(332, 450, back_img, 1)
 start_button = button.Button(260, 100, start_img, 1)
 # create button instances for main_game
 LEFT = 50
-RIGHT = 800 - LEFT * 2
-Y = 140
+RIGHT = 700 - LEFT * 2
+Y = 100
 left_boxes_button = []
 right_boxes_button = []
 central_images = []
@@ -86,8 +85,7 @@ def draw_game():
             SCREEN_WIDTH // 2, 150 * i, central[i], 1))
     for i in range(1, 4, 1):
         left_boxes_button.append(button.Button(LEFT, Y * i, left_boxes[i], 1))
-        right_boxes_button.append(button.Button(
-            RIGHT, Y * i, right_boxes[i], 1))
+        right_boxes_button.append(button.Button(RIGHT, Y * i, right_boxes[i], 1))
     screen.fill((200, 200, 200))
     for i in range(0, len(right_boxes_button), 1):
         right_boxes_button[i].draw(screen)

@@ -35,8 +35,11 @@ font = pygame.font.Font('freesansbold.ttf', 16)
 
 value = 0
 
-while 1:
-
+run = True
+while run:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
     window.blit(background, (0, 0))
 
 #first product
@@ -89,3 +92,4 @@ while 1:
             window.blit(sth, (803,227.5))
             pygame.display.update()
             count += 1
+pygame.quit()

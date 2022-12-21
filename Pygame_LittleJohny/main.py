@@ -29,8 +29,9 @@ keys_img = pygame.image.load('button_keys.png').convert_alpha()
 back_img = pygame.image.load('button_back.png').convert_alpha()
 start_img = pygame.image.load('start_btn.png').convert_alpha()
 # main game img
-size = (160, 260)
-box1 = pygame.transform.scale(pygame.image.load("box1.png"), size)
+size = (160, 150)
+box1 = pygame.transform.scale(
+    pygame.image.load("box1.png"), size)
 box2 = pygame.transform.scale(
     pygame.image.load("box2.png").convert_alpha(), size)
 box3 = pygame.transform.scale(
@@ -43,9 +44,9 @@ box5 = pygame.transform.scale(
 box6 = pygame.transform.scale(
     pygame.image.load("box6.png").convert_alpha(), size)
 right_boxes = [0, box4, box5, box6]
-alfa = pygame.image.load("alfa.png").convert_alpha()
-beta = pygame.image.load("beta.png").convert_alpha()
-combine = pygame.image.load("hi2.png").convert_alpha()
+alfa = pygame.image.load("Boss\\boss_face_up.svg").convert_alpha()
+beta = pygame.image.load("Other_pictures\\metal_tray.svg").convert_alpha()
+combine = pygame.transform.scale(pygame.image.load("Other_pictures\\Combine.png").convert_alpha(), (250, 315))
 central = [alfa, beta, combine]
 # create button instances
 resume_button = button.Button(304, 125, resume_img, 1)
@@ -81,12 +82,23 @@ right_order = [0, 1, 2, 3]
 
 def draw_game():
     for i in range(0, 3, 1):
-        central_images.append(button.Button(
-            SCREEN_WIDTH // 2, 150 * i, central[i], 1))
+        if(i == 0):
+            central_images.append(button.Button(330, 150 * i, central[i], 1))
+        if(i == 1):
+            central_images.append(button.Button(275, 125 * i, central[i], 1))
+        if(i == 2):
+            central_images.append(button.Button(270, 200 * i, central[i], 1))
     for i in range(1, 4, 1):
-        left_boxes_button.append(button.Button(LEFT, Y * i, left_boxes[i], 1))
-        right_boxes_button.append(button.Button(RIGHT, Y * i, right_boxes[i], 1))
-    screen.fill((200, 200, 200))
+        if(i == 1):
+            left_boxes_button.append(button.Button(LEFT, 80, left_boxes[i], 1))
+            right_boxes_button.append(button.Button(RIGHT, 80, right_boxes[i], 1))
+        if(i == 2):
+            left_boxes_button.append(button.Button(LEFT, 235, left_boxes[i], 1))
+            right_boxes_button.append(button.Button(RIGHT, 235, right_boxes[i], 1))
+        if(i == 3):
+            left_boxes_button.append(button.Button(LEFT, 380, left_boxes[i], 1))
+            right_boxes_button.append(button.Button(RIGHT, 380, right_boxes[i], 1))
+    screen.fill((113,106,98))
     for i in range(0, len(right_boxes_button), 1):
         right_boxes_button[i].draw(screen)
         left_boxes_button[i].draw(screen)

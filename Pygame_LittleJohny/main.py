@@ -245,7 +245,7 @@ def main_menu():
             if event.type == pygame.QUIT:
                 run = False
                 # event handler
-        if menu_state == "second_fase":  # slagame go v nov if zashtoto v straiq ne se izpulnqva
+        if menu_state == "game_1":  # slagame go v nov if zashtoto v straiq ne se izpulnqva
             for i in range(0, 3, 1):
                 if(left_boxes_button[i].draw(screen)):
                     central[1] = left_boxes[i + 1]
@@ -253,7 +253,7 @@ def main_menu():
                 if(right_boxes_button[i].draw(screen)):
                     central[1] = right_boxes[i + 1]
                     choices.append(i + 3)
-        if menu_state == "second_fase":
+        if menu_state == "game_1":
             if(central_images[2].draw(screen)):
                 if(len(choices) == 4):
                     choices.sort()

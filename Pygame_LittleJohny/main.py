@@ -134,11 +134,9 @@ def conv ():
     value = 0
 
     run = True
-    while run:
+    while count < 7:
     #first 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
+ 
         window.blit(background, (0, 0))
         if(flag == 1):
             #this is till  the conversation

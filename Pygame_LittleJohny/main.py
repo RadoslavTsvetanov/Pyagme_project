@@ -107,7 +107,7 @@ def draw_game():
     for i in central_images:
         i.draw(screen)
 
-def conv (menu_state):
+def conv ():
     window = pygame.display.set_mode((1000, 600))
 
     text_box = pygame.image.load("Other_pictures\\dialog_box.png")
@@ -136,6 +136,9 @@ def conv (menu_state):
     run = True
     while run:
     #first 
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
         window.blit(background, (0, 0))
         if(flag == 1):
             #this is till  the conversation
@@ -156,8 +159,6 @@ def conv (menu_state):
                     window.blit(gray_square, (690, -62))
                     window.blit(recipes, (803,100 ))
                     pygame.display.update()
-                    menu_state = "second_fase"
-                    return menu_state
 
             #this renovate the text
             if (count < 6):
@@ -234,10 +235,12 @@ def main_menu():
         if menu_state == "audio":
             draw_audio_settings()
         if menu_state == "game":
-            conv(menu_state)
-        if menu_state == "second_fase":
+            conv()
+            menu_state = "game_1"
+        if menu_state == "game_1":
             draw_game()
 
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False

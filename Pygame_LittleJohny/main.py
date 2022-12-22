@@ -87,7 +87,7 @@ def draw_game():
         if(i == 0):
             central_images.append(button.Button(330, 150 * i, central[i], 1))
         if(i == 1):
-            central_images.append(button.Button(275, 125 * i, central[i], 1))
+            central_images.append(button.Button(275, 140 * i, central[i], 1))
         if(i == 2):
             central_images.append(button.Button(280, 250 * i, central[i], 1))
     for i in range(1, 4, 1):

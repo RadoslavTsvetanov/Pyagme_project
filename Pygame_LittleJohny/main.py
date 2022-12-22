@@ -107,6 +107,87 @@ def draw_game():
     for i in central_images:
         i.draw(screen)
 
+def conv (menu_state):
+    window = pygame.display.set_mode((1000, 600))
+
+    text_box = pygame.image.load("Other_pictures\\dialog_box.png")
+    text_box = pygame.transform.scale(text_box, (290,290))
+    gray_square = pygame.image.load("Other_pictures\\drawing.svg")
+    gray_square = pygame.transform.scale(gray_square, (1590,1890))
+    background = pygame.image.load("Other_pictures\\background.svg")
+    recipes = pygame.image.load("recipes\\computer_recipe.png")
+    recipes = pygame.transform.scale(recipes, (200,290))
+
+    flag = 1
+    count = 0
+
+    conv = ["Hello, I'm John!", "I'm having trouble with", "finding a manufacturer", "for the product I want.", "Could you help me", "with its development?"]
+    conv_1 = ["Hello, I'm Pablo!", "I'm having trouble with", "finding a manufacturer", "for the product I want.", "Could you help me", "with its development?"]
+
+    image_sprite = [pygame.image.load("meeting.svg"), pygame.image.load("meeting_1.svg")]
+
+    clock = pygame.time.Clock()
+
+    black=(0, 0, 0)
+    font = pygame.font.Font('freesansbold.ttf', 16)
+
+    value = 0
+
+    run = True
+    while run:
+    #first 
+        window.blit(background, (0, 0))
+        if(flag == 1):
+            #this is till  the conversation
+            if(count <= 6):
+                if value >= len(image_sprite):
+                    value = 0
+                clock.tick(1)
+                image = image_sprite[value]
+
+                window.blit(image, (150, 182))
+                printing_text_box(window,text_box)
+
+                pygame.display.update()
+                value += 1   
+                #this remove the white text box
+                if(count == 6):
+                    count +=1
+                    window.blit(gray_square, (690, -62))
+                    window.blit(recipes, (803,100 ))
+                    pygame.display.update()
+                    menu_state = "second_fase"
+                    return menu_state
+
+            #this renovate the text
+            if (count < 6):
+                sth = font.render(conv[count], True, black)
+                window.blit(sth, (803,227.5))
+                pygame.display.update()
+                count += 1
+
+        elif(flag == 2):
+            if(count <= 6):
+                if value >= len(image_sprite):
+                    value = 0
+                clock.tick(1)
+                image = image_sprite[value]
+
+                window.blit(image, (150, 182))
+                printing_text_box()
+
+                pygame.display.update()
+                value += 1
+                if(count == 6):
+                    count +=1
+                    window.blit(gray_square, (690, -62))
+                    pygame.display.update()
+
+            if (count < 6):
+                sth = font.render(conv_1[count], True, black)
+                window.blit(sth, (803,227.5))
+                pygame.display.update()
+                count += 1
 
 def draw_text(text, font, text_col, x, y):
     img = font.render(text, True, text_col)
@@ -116,6 +197,9 @@ def draw_text(text, font, text_col, x, y):
 def draw_audio_settings():
     screen.fill((52, 78, 91))
     screen.blit(volume, (0, 0))
+
+def printing_text_box (window, text_box):
+    window.blit(text_box, (760, 105))
 
 
 def main_menu():
@@ -150,13 +234,15 @@ def main_menu():
         if menu_state == "audio":
             draw_audio_settings()
         if menu_state == "game":
+            conv(menu_state)
+        if menu_state == "second_fase":
             draw_game()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
                 # event handler
-        if menu_state == "game":  # slagame go v nov if zashtoto v straiq ne se izpulnqva
+        if menu_state == "second_fase":  # slagame go v nov if zashtoto v straiq ne se izpulnqva
             for i in range(0, 3, 1):
                 if(left_boxes_button[i].draw(screen)):
                     central[1] = left_boxes[i + 1]
@@ -164,7 +250,7 @@ def main_menu():
                 if(right_boxes_button[i].draw(screen)):
                     central[1] = right_boxes[i + 1]
                     choices.append(i + 3)
-        if menu_state == "game":
+        if menu_state == "second_fase":
             if(central_images[2].draw(screen)):
                 if(len(choices) == 4):
                     choices.sort()

@@ -28,6 +28,7 @@ audio_img = pygame.image.load('button_audio.png').convert_alpha()
 keys_img = pygame.image.load('button_keys.png').convert_alpha()
 back_img = pygame.image.load('button_back.png').convert_alpha()
 start_img = pygame.image.load('start_btn.png').convert_alpha()
+laptop = pygame.image.load('Products\\laptop.svg').convert_alpha()
 # main game img
 size = (160, 150)
 box1 = pygame.transform.scale(
@@ -46,7 +47,8 @@ box6 = pygame.transform.scale(
 right_boxes = [0, box4, box5, box6]
 alfa = pygame.image.load("Boss\\boss_face_up.svg").convert_alpha()
 beta = pygame.image.load("Other_pictures\\metal_tray.svg").convert_alpha()
-combine = pygame.transform.scale(pygame.image.load("Other_pictures\\Combine.png").convert_alpha(), (250, 315))
+beta_1 = (button.Button(275, 125 * 1, beta, 1))
+combine = pygame.transform.scale(pygame.image.load("Other_pictures\\Combine.png").convert_alpha(), (250, 90))
 central = [alfa, beta, combine]
 # create button instances
 resume_button = button.Button(304, 125, resume_img, 1)
@@ -66,7 +68,7 @@ right_boxes_button = []
 central_images = []
 # _________________________________________________________________________
 # combinations
-right1_img = pygame.image.load("right1.png").convert_alpha()
+right1_img = pygame.image.load("Products\\laptop.svg").convert_alpha()
 right2_img = pygame.image.load("right2.png").convert_alpha()
 right3_img = pygame.image.load("right3.png").convert_alpha()
 right4_img = pygame.image.load("right4.png").convert_alpha()
@@ -87,7 +89,7 @@ def draw_game():
         if(i == 1):
             central_images.append(button.Button(275, 125 * i, central[i], 1))
         if(i == 2):
-            central_images.append(button.Button(270, 200 * i, central[i], 1))
+            central_images.append(button.Button(280, 250 * i, central[i], 1))
     for i in range(1, 4, 1):
         if(i == 1):
             left_boxes_button.append(button.Button(LEFT, 80, left_boxes[i], 1))
@@ -167,7 +169,8 @@ def main_menu():
                 if(len(choices) == 4):
                     choices.sort()
                     if(choices == right_order):
-                        central[1] = right[0]
+                        screen.blit(beta, (275, 125))
+                        screen.blit(laptop, (275, 125))
                     else:
                         central[1] = xxx_img
                     choices.clear()

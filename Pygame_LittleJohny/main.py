@@ -29,6 +29,7 @@ keys_img = pygame.image.load('button_keys.png').convert_alpha()
 back_img = pygame.image.load('button_back.png').convert_alpha()
 start_img = pygame.image.load('start_btn.png').convert_alpha()
 laptop = pygame.image.load('Products\\laptop.svg').convert_alpha()
+laptop = pygame.transform.scale(laptop, (700, 550))
 # main game img
 size = (160, 150)
 box1 = pygame.transform.scale(
@@ -50,6 +51,7 @@ beta = pygame.image.load("Other_pictures\\metal_tray.svg").convert_alpha()
 beta_1 = (button.Button(275, 125 * 1, beta, 1))
 combine = pygame.transform.scale(pygame.image.load("Other_pictures\\Combine.png").convert_alpha(), (250, 90))
 central = [alfa, beta, combine]
+central.append(laptop)
 # create button instances
 resume_button = button.Button(304, 125, resume_img, 1)
 options_button = button.Button(297, 250, options_img, 1)
@@ -83,6 +85,8 @@ right_order = [0, 1, 2, 3]
 
 
 def draw_game():
+    recipes = pygame.image.load("recipes\\computer_recipe.png")
+    recipes = pygame.transform.scale(recipes, (200,290))
     for i in range(0, 3, 1):
         if(i == 0):
             central_images.append(button.Button(330, 150 * i, central[i], 1))
@@ -101,6 +105,7 @@ def draw_game():
             left_boxes_button.append(button.Button(LEFT, 380, left_boxes[i], 1))
             right_boxes_button.append(button.Button(RIGHT, 380, right_boxes[i], 1))
     screen.fill((113,106,98))
+    screen.blit(recipes, (803,100 ))
     for i in range(0, len(right_boxes_button), 1):
         right_boxes_button[i].draw(screen)
         left_boxes_button[i].draw(screen)
@@ -200,12 +205,94 @@ def draw_audio_settings():
 def printing_text_box (window, text_box):
     window.blit(text_box, (760, 105))
 
+def second_state():
+    window = pygame.display.set_mode((1000, 600))
+
+    text_box = pygame.image.load("Other_pictures\\dialog_box.png")
+    text_box = pygame.transform.scale(text_box, (290,290))
+    gray_square = pygame.image.load("Other_pictures\\drawing.svg")
+    gray_square = pygame.transform.scale(gray_square, (1590,1890))
+    background = pygame.image.load("Other_pictures\\background.svg")
+    recipes = pygame.image.load("recipes\\computer_recipe.png")
+    recipes = pygame.transform.scale(recipes, (200,290))
+
+    flag = 1
+    count = 0
+
+    conv = ["Hello, I'm John!", "I'm having trouble with", "finding a manufacturer", "for the product I want.", "Could you help me", "with its development?"]
+    conv_1 = ["Hello, I'm Pablo!", "I'm having trouble with", "finding a manufacturer", "for the product I want.", "Could you help me", "with its development?"]
+
+    image_sprite = [pygame.image.load("meeting.svg"), pygame.image.load("meeting_1.svg")]
+
+    clock = pygame.time.Clock()
+
+    black=(0, 0, 0)
+    font = pygame.font.Font('freesansbold.ttf', 16)
+
+    value = 0
+
+    run = True
+    while count < 7:
+    #first 
+ 
+        window.blit(background, (0, 0))
+        if(flag == 1):
+            #this is till  the conversation
+            if(count <= 6):
+                if value >= len(image_sprite):
+                    value = 0
+                clock.tick(1)
+                image = image_sprite[value]
+
+                window.blit(image, (150, 182))
+                printing_text_box(window,text_box)
+
+                pygame.display.update()
+                value += 1   
+                #this remove the white text box
+                if(count == 6):
+                    count +=1
+                    window.blit(gray_square, (690, -62))
+                    window.blit(recipes, (803,100 ))
+                    pygame.display.update()
+
+            #this renovate the text
+            if (count < 6):
+                sth = font.render(conv[count], True, black)
+                window.blit(sth, (803,227.5))
+                pygame.display.update()
+                count += 1
+
+        elif(flag == 2):
+            if(count <= 6):
+                if value >= len(image_sprite):
+                    value = 0
+                clock.tick(1)
+                image = image_sprite[value]
+
+                window.blit(image, (150, 182))
+                printing_text_box()
+
+                pygame.display.update()
+                value += 1
+                if(count == 6):
+                    count +=1
+                    window.blit(gray_square, (690, -62))
+                    pygame.display.update()
+
+            if (count < 6):
+                sth = font.render(conv_1[count], True, black)
+                window.blit(sth, (803,227.5))
+                pygame.display.update()
+                count += 1
+
 
 def main_menu():
     # game loop
     choices = []
     menu_state = "main"
     run = True
+    flag = 0
     while run:
 
         screen.fill((52, 78, 91))
@@ -237,6 +324,7 @@ def main_menu():
             menu_state = "game_1"
         if menu_state == "game_1":
             draw_game()
+            
 
         
         for event in pygame.event.get():
@@ -256,13 +344,18 @@ def main_menu():
                 if(len(choices) == 4):
                     choices.sort()
                     if(choices == right_order):
-                        screen.blit(beta, (275, 125))
-                        screen.blit(laptop, (275, 125))
+                        central[1] = beta
+                        flag = 1
                     else:
                         central[1] = xxx_img
                     choices.clear()
+            if flag == 1 :
+                screen.blit(laptop, (310, 225))
+                menu_state == "game_2"
         pygame.display.update()
+        if menu_state == "game_2":
+            second_state()
+            pygame.display.update()
     pygame.quit()
-
 
 main_menu()

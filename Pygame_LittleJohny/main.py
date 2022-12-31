@@ -204,8 +204,10 @@ def draw_audio_settings():
 
 def printing_text_box (window, text_box):
     window.blit(text_box, (760, 105))
+def printing_text_box_2(window, text_box):
+    window.blit(text_box, (380, 105))
 
-def second_state():
+def conv_2 ():
     window = pygame.display.set_mode((1000, 600))
 
     text_box = pygame.image.load("Other_pictures\\dialog_box.png")
@@ -215,11 +217,13 @@ def second_state():
     background = pygame.image.load("Other_pictures\\background.svg")
     recipes = pygame.image.load("recipes\\computer_recipe.png")
     recipes = pygame.transform.scale(recipes, (200,290))
+    laptop = pygame.image.load('Products\\laptop.svg').convert_alpha()
+    laptop = pygame.transform.scale(laptop, (700, 550))
 
     flag = 1
     count = 0
 
-    conv = ["Hello, I'm John!", "I'm having trouble with", "finding a manufacturer", "for the product I want.", "Could you help me", "with its development?"]
+    conv = ["John, I am ready", "thanks for choosing", "us. I hope you will", "like the product.If", "you have a problem, you", "know where to find me!"]
     conv_1 = ["Hello, I'm Pablo!", "I'm having trouble with", "finding a manufacturer", "for the product I want.", "Could you help me", "with its development?"]
 
     image_sprite = [pygame.image.load("meeting.svg"), pygame.image.load("meeting_1.svg")]
@@ -231,7 +235,6 @@ def second_state():
 
     value = 0
 
-    run = True
     while count < 7:
     #first 
  
@@ -245,21 +248,21 @@ def second_state():
                 image = image_sprite[value]
 
                 window.blit(image, (150, 182))
-                printing_text_box(window,text_box)
+                printing_text_box_2(window,text_box)
 
                 pygame.display.update()
                 value += 1   
                 #this remove the white text box
                 if(count == 6):
                     count +=1
-                    window.blit(gray_square, (690, -62))
-                    window.blit(recipes, (803,100 ))
+                    window.blit(gray_square, (390, -62))
                     pygame.display.update()
+            screen.blit(laptop, (450, 350))
 
             #this renovate the text
             if (count < 6):
                 sth = font.render(conv[count], True, black)
-                window.blit(sth, (803,227.5))
+                window.blit(sth, (413,227.5))
                 pygame.display.update()
                 count += 1
 
@@ -282,10 +285,9 @@ def second_state():
 
             if (count < 6):
                 sth = font.render(conv_1[count], True, black)
-                window.blit(sth, (803,227.5))
+                window.blit(sth, (803, 227.5))
                 pygame.display.update()
                 count += 1
-
 
 def main_menu():
     # game loop
@@ -351,11 +353,11 @@ def main_menu():
                     choices.clear()
             if flag == 1 :
                 screen.blit(laptop, (310, 225))
-                menu_state == "game_2"
+                menu_state = "game_2"
         pygame.display.update()
         if menu_state == "game_2":
-            second_state()
+            conv_2()
             pygame.display.update()
-    pygame.quit()
+            pygame.quit()
 
 main_menu()
